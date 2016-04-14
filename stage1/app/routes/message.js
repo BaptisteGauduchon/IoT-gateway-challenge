@@ -13,7 +13,6 @@ router.post('/messages', function(req, res, next) {
 
 	// validate incoming message data
 	msgValidator.validate(sensorMessage, function(err) {
-		console.log(err);
 		if(err) {
 			res.status(400).json(err);
 		}
