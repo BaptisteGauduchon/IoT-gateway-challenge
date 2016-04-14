@@ -18,7 +18,7 @@ router.post('/messages', function(req, res, next) {
 			res.status(403).end();
 		} else {
 			// send back saved data
-			var responseMessage = {id : message.id, timestamp: ts, sensorType: message.timestamp, value: message.value};
+			var responseMessage = {id : message.id, timestamp: ts, sensorType: message.sensorType, value: message.value};
 			res.send(responseMessage);
 		}
 	});
