@@ -2,21 +2,26 @@ var express = require('express');
 var router = express.Router();
 
 // require storage service
-var messages = require('storage').messages
+var storage = require('storage');
 
-// POST sensors message
+// POST sensors messages
 router.post('/messages', function(req, res, next) {
-	// create the document object to be stored
-	var sensorMessage = {id : req.body.id, timestamp: Date.parse(req.body.timestamp), sensorType: req.body.sensorType, value: req.body.value};
-	var messageId = {id : req.body.id};
 
-	// if message ID is UID, persist message in db
-	if (messages.insert(sensorMessage)) {
-		res.send(sensorMessage);
-	} else {
-		// return error on duplicated message id
-		res.status(403).end();
-	}
+	// create the message document & date conversion to milliseconds for storage
+	var ts = req.body.timestamp;
+	var sensorMessage = {id : req.body.id, timestamp: Date.parse(ts), sensorType: req.body.sensorType, value: req.body.value};
+
+	// store message
+	storage.addMessage(sensorMessage, function(err,message) {
+		if (err) {
+			// return error (duplicated message id for instance)
+			res.status(403).end();
+		} else {
+			// send back saved data
+			var responseMessage = {id : message.id, timestamp: ts, sensorType: message.timestamp, value: message.value};
+			res.send(responseMessage);
+		}
+	});
 });
 
 // export message routes
