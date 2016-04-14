@@ -24,7 +24,10 @@ coverage
 build/Release
 
 # Dependency directory
-#node_modules
+node_modules
+
+# include app specific dependency directory
+!stage1/app/node_modules
 
 # Optional npm cache directory
 .npm

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "nodemon app/app.js"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,8 @@
     "body-parser": "^1.15.0",
     "express": "latest",
     "lokijs": "^1.3.16"
+  },
+  "devDependencies": {
+    "nodemon": "^1.9.1"
   }
 }
