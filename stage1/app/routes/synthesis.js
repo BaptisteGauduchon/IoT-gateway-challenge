@@ -4,7 +4,7 @@ var router = express.Router();
 // one hour in milliseconds
 const oneHourInMillis = 1000*60*60;
 
-// require storage service
+// require application modules
 var storage = require('storage');
 
 // GET sensors synthesis

@@ -1,15 +1,28 @@
 var express = require('express');
 var router = express.Router();
 
-// require storage service
+// require application modules
 var storage = require('storage');
+var msgValidator = require('messageValidator');
 
 // POST sensors messages
 router.post('/messages', function(req, res, next) {
 
-	// create the message document & date conversion to milliseconds for storage
+	// create the message document from request
+	var sensorMessage = {id : req.body.id, timestamp: req.body.timestamp, sensorType: req.body.sensorType, value: req.body.value};
+
+	// validate incoming message data
+	msgValidator.validate(sensorMessage, function(err) {
+		console.log(err);
+		if(err) {
+			res.status(400).json(err);
+		}
+	});
+
+	// convert date to millisecond for storage
+	// TODO : homegenize date format with storage for date comparison 
 	var ts = req.body.timestamp;
-	var sensorMessage = {id : req.body.id, timestamp: Date.parse(ts), sensorType: req.body.sensorType, value: req.body.value};
+	sensorMessage.timestamp = Date.parse(ts);
 
 	// store message
 	storage.addMessage(sensorMessage, function(err,message) {

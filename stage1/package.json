@@ -27,7 +27,8 @@
   "dependencies": {
     "body-parser": "latest",
     "express": "latest",
-    "lokijs": "latest"
+    "lokijs": "latest",
+    "validator": "latest"
   },
   "devDependencies": {
     "nodemon": "latest"
