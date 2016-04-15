@@ -24,7 +24,10 @@ app.use(function(err, req, res, next) {
 	res.status(err.status || 500).json({error : err});
 });
 
-/* start server */
+// start server
 app.listen(port, function () {
   console.log('listening at %d', port);
 });
+
+// export express application
+module.exports = app;

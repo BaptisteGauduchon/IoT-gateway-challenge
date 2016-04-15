@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "node app/app.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon app/app.js"
+    "dev": "nodemon app/app.js",
+    "test": "mocha test"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
     "validator": "latest"
   },
   "devDependencies": {
-    "nodemon": "latest"
+    "nodemon": "latest",
+    "mocha": "latest",
+    "supertest": "latest"
   }
 }
