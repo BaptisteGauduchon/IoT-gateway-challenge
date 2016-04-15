@@ -14,7 +14,7 @@ router.get('/messages/synthesis', function(req, res, next) {
 	storage.getLastMessages(oneHourInMillis, function(err, messages) {
 
 		if (err) {
-			res.status(404).json({error:err});
+			next({status : 400, message : err});
 		} else {
 			// groupe messages by sensor type
 			// TODO direclty while storage query (is it possible with lokiJS ?)
