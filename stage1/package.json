@@ -25,14 +25,14 @@
   },
   "homepage": "https://github.com/BaptisteGauduchon/IoT-gateway-challenge#readme",
   "dependencies": {
+    "ajv": "^4.0.0",
     "body-parser": "latest",
     "express": "latest",
-    "lokijs": "latest",
-    "validator": "latest"
+    "lokijs": "latest"
   },
   "devDependencies": {
-    "nodemon": "latest",
     "mocha": "latest",
+    "nodemon": "latest",
     "supertest": "latest"
   }
 }
