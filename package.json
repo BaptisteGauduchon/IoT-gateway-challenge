@@ -33,6 +33,7 @@
   "devDependencies": {
     "mocha": "latest",
     "nodemon": "latest",
+    "standard": "^6.0.8",
     "supertest": "latest"
   }
 }
