@@ -1,7 +1,7 @@
-var express = require('express');
-var bodyParser = require('body-parser');
-var synthesis = require('./routes/synthesis');
-var message = require('./routes/message');
+var express = require("express");
+var bodyParser = require("body-parser");
+var synthesis = require("./routes/synthesis");
+var message = require("./routes/message");
 var app = express();
 var port = process.env.PORT || 8080;
 
@@ -9,8 +9,8 @@ var port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 
 // use routes
-app.use('/', synthesis);
-app.use('/', message);
+app.use("/", synthesis);
+app.use("/", message);
 
 // error logger
 app.use(function(err, req, res, next) {
@@ -29,7 +29,7 @@ app.use(function(err, req, res, next) {
 
 // start server
 app.listen(port, function () {
-  console.log('listening at %d', port);
+	console.log("listening at %d", port);
 });
 
 // export express application

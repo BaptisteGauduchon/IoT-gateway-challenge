@@ -1,4 +1,4 @@
-global.request = require('supertest');
-global.app = require('../app/app');
+global.request = require("supertest");
+global.app = require("../app/app");
 
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = "test";

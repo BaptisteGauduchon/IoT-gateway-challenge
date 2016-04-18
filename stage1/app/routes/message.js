@@ -1,12 +1,12 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
 // require application modules
-var storage = require('storage');
-var msgValidator = require('messageValidator');
+var storage = require("storage");
+var msgValidator = require("messageValidator");
 
 // POST sensors messages
-router.post('/messages', function(req, res, next) {
+router.post("/messages", function(req, res, next) {
 
 	// validate incoming message data
 	msgValidator.validate(req.body, function(err) {
@@ -22,7 +22,7 @@ router.post('/messages', function(req, res, next) {
 			};
 
 			// store message
-			storage.addMessage(sensorMessage, function(err,message) {
+			storage.addMessage(sensorMessage, function(err) {
 				if (err) {
 					// return error (duplicated message id for instance)
 					next({status : 403, message : err});
