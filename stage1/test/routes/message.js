@@ -1,6 +1,3 @@
-var request = require('supertest');
-var app = require('../app/app');
-
 // message API test
 describe('Messages', function() {
 	describe('POST', function() {
@@ -32,28 +29,28 @@ describe('Messages', function() {
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on bad [message.timestamp] format', function(done) {
-			var message = {"id":"abcd1234", "timestamp":45654654654, "sensorType":1, "value":1};
+			var message = {"id":"abcd12345", "timestamp":45654654654, "sensorType":1, "value":1};
 			request(app)
 				.post('/messages')
 				.send(message)
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on bad [message.sensorType] format', function(done) {
-			var message = {"id":"abcd1234", "timestamp":new Date().toISOString(), "sensorType":"1", "value":1};
+			var message = {"id":"abcd12346", "timestamp":new Date().toISOString(), "sensorType":"1", "value":1};
 			request(app)
 				.post('/messages')
 				.send(message)
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on bad [message.value] format', function(done) {
-			var message = {"id":"abcd1234", "timestamp":new Date().toISOString(), "sensorType":1, "value":"1"};
+			var message = {"id":"abcd12347", "timestamp":new Date().toISOString(), "sensorType":1, "value":"1"};
 			request(app)
 				.post('/messages')
 				.send(message)
 				.expect(400,done)
 		});
 
-		// testing message param values validation
+		// testing message values validation
 		it('should respond with HTTP status code 400 on wrong [message.id] data', function(done) {
 			var message = {"id":"abcd1234!", "timestamp":new Date().toISOString(), "sensorType":1, "value": 1};
 			request(app)
@@ -62,35 +59,35 @@ describe('Messages', function() {
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on wrong [message.timestamp] data', function(done) {
-			var message = {"id":"abcd1234", "timestamp":"216-04-15T16:43:00.00Z", "sensorType":1, "value": -1};
+			var message = {"id":"abcd12348", "timestamp":"216-04-15T16:43:00.00Z", "sensorType":1, "value": -1};
 			request(app)
 				.post('/messages')
 				.send(message)
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on wrong [message.sensorType] data', function(done) {
-			var message = {"id":"abcd1234", "timestamp":new Date().toISOString(), "sensorType":-1, "value": 1};
+			var message = {"id":"abcd12349", "timestamp":new Date().toISOString(), "sensorType":-2147483649, "value": 1};
 			request(app)
 				.post('/messages')
 				.send(message)
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on wrong [message.sensorType] data', function(done) {
-			var message = {"id":"abcd1234", "timestamp":new Date().toISOString(), "sensorType":2147483648, "value": 1};
+			var message = {"id":"abcd123410", "timestamp":new Date().toISOString(), "sensorType":2147483648, "value": 1};
 			request(app)
 				.post('/messages')
 				.send(message)
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on wrong [message.value] data', function(done) {
-			var message = {"id":"abcd1234", "timestamp":new Date().toISOString(), "sensorType":1, "value": -1};
+			var message = {"id":"abcd123411", "timestamp":new Date().toISOString(), "sensorType":1, "value": -9223372036854777000};
 			request(app)
 				.post('/messages')
 				.send(message)
 				.expect(400,done)
 		});
 		it('should respond with HTTP status code 400 on wrong [message.value] data', function(done) {
-			var message = {"id":"abcd1234", "timestamp":new Date().toISOString(), "sensorType":1, "value": 9223372036854775808};
+			var message = {"id":"abcd123412", "timestamp":new Date().toISOString(), "sensorType":1, "value": 9223372036854777000};
 			request(app)
 				.post('/messages')
 				.send(message)
@@ -98,16 +95,3 @@ describe('Messages', function() {
 		});
 	});
 });
-
-// Synthesis API test
-describe('Synthesis', function() {
-	describe('GET at /messages/synthesis', function() {
-		it('should respond with HTTP status code 200 and synthesis data', function(done) {
-			request(app)
-				.get('/messages/synthesis')
-				.set('Accept', 'application/json')
-				.expect(200, [{"sensorType":1,"minValue":1,"maxValue":1,"mediumValue":1}], done)
-		});
-	});
-});
-
