@@ -7,6 +7,7 @@ var port = process.env.PORT || 8080
 
 // support JSON encoded request bodies only
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // use routes
 app.use('/', synthesis)
